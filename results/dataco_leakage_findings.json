@@ -1,0 +1,116 @@
+{
+  "naive_model": {
+    "label": "naive (leaky)",
+    "features": [
+      "Days for shipment (scheduled)",
+      "Order Item Quantity",
+      "Sales",
+      "Order Item Discount Rate",
+      "Category Id",
+      "Department Id",
+      "Days for shipping (real)",
+      "Shipping Mode",
+      "Customer Segment",
+      "Market",
+      "Order Region"
+    ],
+    "n_train": 135389,
+    "n_val": 45130,
+    "accuracy": 0.9758475515178373,
+    "roc_auc": 0.973753657743729
+  },
+  "honest_model": {
+    "label": "honest",
+    "features": [
+      "Days for shipment (scheduled)",
+      "Order Item Quantity",
+      "Sales",
+      "Order Item Discount Rate",
+      "Category Id",
+      "Department Id",
+      "Shipping Mode",
+      "Customer Segment",
+      "Market",
+      "Order Region"
+    ],
+    "n_train": 135389,
+    "n_val": 45130,
+    "accuracy": 0.6955240416574341,
+    "roc_auc": 0.7306792020217371
+  },
+  "roc_auc_inflation": 0.24307445572199193,
+  "gate_status": "BLOCKED",
+  "validation_findings": [
+    {
+      "check_name": "target_leakage",
+      "flag": "OK",
+      "detail": "no single feature approaches the model's own predictive power (0.948)",
+      "metadata": {
+        "model_power": 0.9475,
+        "threshold_ratio": 0.95,
+        "min_power": 0.8,
+        "n_features_scored": 11
+      }
+    },
+    {
+      "check_name": "split_overlap",
+      "flag": "DUPLICATE_ROWS_RISK",
+      "detail": "6336 duplicate row(s) within the validation set (14.0%, max 5%) \u2014 duplicates weight the same observation more than once in every metric",
+      "metadata": {
+        "check": "duplicates_within_validation",
+        "n_duplicates": 6336,
+        "duplicate_fraction": 0.1404,
+        "threshold": 0.05
+      }
+    },
+    {
+      "check_name": "split_overlap",
+      "flag": "NOT_APPLICABLE",
+      "detail": "no X_train supplied \u2014 supply the training frame and this check reports how many validation rows the model has already seen",
+      "metadata": {
+        "check": "overlap_with_training"
+      }
+    },
+    {
+      "check_name": "validation_strategy",
+      "flag": "NOT_APPLICABLE",
+      "detail": "no model_card supplied \u2014 the validation strategy is a claim the card records, not something measurable from the data",
+      "metadata": {}
+    },
+    {
+      "check_name": "feature_contract",
+      "flag": "NOT_APPLICABLE",
+      "detail": "cannot tell what the model was fitted on \u2014 supply context.X_train, or context.expected_features for a model whose schema this library cannot read (a remote endpoint, say)",
+      "metadata": {}
+    },
+    {
+      "check_name": "feature_drift",
+      "flag": "NOT_APPLICABLE",
+      "detail": "no X_train supplied \u2014 train-serve skew needs the training frame to compare against",
+      "metadata": {}
+    },
+    {
+      "check_name": "combined_feature_leakage",
+      "flag": "COMBINED_LEAKAGE_RISK",
+      "detail": "Days for shipment (scheduled) + Days for shipping (real) together reach 0.948 of the target out-of-fold (100% of the whole model's 0.948), while no single one of them alone reaches 0.80 \u2014 check whether they are different views of the same post-outcome fact (e.g. an actual value and the plan or schedule it is compared against to define the label)",
+      "metadata": {
+        "features": [
+          "Days for shipment (scheduled)",
+          "Days for shipping (real)"
+        ],
+        "combo_power": 0.9483,
+        "model_power": 0.9475,
+        "power_ratio": 1.0008,
+        "individual_power": {
+          "Days for shipment (scheduled)": 0.391,
+          "Days for shipping (real)": 0.4163
+        },
+        "threshold_ratio": 0.95,
+        "min_power": 0.8,
+        "cv_folds": 5,
+        "n_candidates_scored": 7,
+        "n_combinations_tested": 21
+      }
+    }
+  ]
+}

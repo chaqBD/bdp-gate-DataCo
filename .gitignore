@@ -1,0 +1,25 @@
+# Large data artifacts — not committed. See data/README.md for how to get them.
+*.csv
+!data/DescriptionDataCoSupplyChain.csv
+
+# Upstream package artifacts kept locally for reference, not part of this repo
+*.whl
+*.tar.gz
+*.pdf
+.inspect/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+.coverage
+htmlcov/
+
+# Env
+.venv/
+venv/
