@@ -8,6 +8,9 @@
 *.pdf
 .inspect/
 
+# Local scratch used to publish the Artifact demo (see docs/index.html for the deployed copy)
+.artifact_scratch/
+
 # Python
 __pycache__/
 *.pyc

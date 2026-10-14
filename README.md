@@ -2,6 +2,8 @@
 
 **Leaky benchmarks: governance gates catch inflated supply-chain results.**
 
+**[Live demo →](https://chaqBD.github.io/bdp-gate-DataCo/)**
+
 A case study and a governance check, both built around one finding: the
 public **DataCo Smart Supply Chain** dataset's `Late_delivery_risk` label is
 defined by comparing two of its own feature columns. Neither column alone
